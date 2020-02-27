@@ -29,6 +29,11 @@ router.get("/allFood/:order", async(req, res, next) => {
   }
 })
 
+router.get("/allIngredients", async(req, res, next) => {
+  let ingredients = await Ingredient.findAll()
+  res.json(ingredients)
+})
+
 router.get("/meat", async(req, res, next) => {
   try{
     let foods = await Food.findAll({
