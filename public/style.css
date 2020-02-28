@@ -1,10 +1,36 @@
+
 body {
-    background-color:lightgray;
+    background-image: url("https://i2.wp.com/www.nintendo-insider.com/wp-content/uploads/2018/05/dont_starve_nintendo_switch_edition_review_header.jpeg?w=1280&ssl=1");
+    font-size: larger;
 }
 
-table, th, td {
-    border: 1px solid black
+div{
+    color: white;
 }
-table{
-    border-collapse: collapse;
+
+td{
+    color: white;
+    background-color: lightslategray; opacity: .8;
+    font-size: larger;  
+}
+thead{
+    font-size: larger;
+}
+.radio{
+    margin: 10px;
+    margin-right: 5px;
+
+}
+h1{
+    background-color: lightslategray; opacity: .9;
+    text-align: center;
+    text-decoration: underline black;
+    margin-bottom: 30px;
+}
+
+
+
+.cheese{
+    margin: 5px;
+    font-size: medium
 }

@@ -10,8 +10,8 @@ const Table = props => {
   const dispatch = useDispatch()
   return (
     <div>
-      <table>
-        <thead>
+      <table  class="table table-bordered table-hover">
+        <thead class="thead-dark">
           <tr onClick={() =>dispatch(orderFood(event.target.innerText))}>
             <th>Name</th>
             <th>Image</th>

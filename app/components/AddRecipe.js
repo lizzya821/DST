@@ -31,7 +31,7 @@ const AddRecipe = props => {
                 <br></br>
                 <IngredientSelect/>
                 <br></br>
-                <button type="submit">Add Recipe</button>
+                <button class="btn btn-light" type="submit">Add Recipe</button>
             </form>
         </div>
     )

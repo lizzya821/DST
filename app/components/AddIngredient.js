@@ -18,12 +18,18 @@ const AddIngredient = props => {
         <div>
             <h1>Add Ingredient</h1>
             <form onChange={() => setIngredient({...ingredient, [event.target.name]: event.target.value})} onSubmit={handleSubmit}>
+                <div class="row">
+                    <div class ="col">
                 <label> Name: </label>
                 <input name="name" value={ingredient.name} type="input" required/>
+                </div>
+                <div class="col">
                 <label> ImageURL: </label>
                 <input name="imageURL" value={ingredient.imageURL}type="input" required/>
+                </div>
+                </div>
                 <br></br>
-                <button type="submit">Submit</button>
+                <button class="btn btn-light" type="submit">Submit</button>
             </form>
         </div>
     )
