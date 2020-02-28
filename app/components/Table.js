@@ -18,7 +18,7 @@ const Table = props => {
             <th>Health</th>
             <th>Sanity</th>
             <th>Hunger</th>
-            <th>Restrictions</th>
+            {/* <th>Restrictions</th> */}
           </tr>
         </thead>
         <tbody>

@@ -13,8 +13,9 @@ const Root = () => {
   }, []);
     return (
         <div>
-            <p>DON'T STARVE FOODS AND RECIPES</p>
+            <h1>DON'T STARVE FOODS AND RECIPES</h1>
             <Link to="/addFood"> Add Food</Link>
+            <Link to="/addIngredient"> Add Ingredient</Link>
             <div id="radios" onChange={() =>dispatch(filterMeat(event.target.value))}>
               <input type="radio" value="allFood" name="meatOrNoMeat"/>
               <label for="all">All</label>

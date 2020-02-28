@@ -71,6 +71,31 @@ router.post("/addRecipe/:foodId", async(req, res, next) => {
   }
 })
 
+router.post("/addFood", async(req, res, next) => {
+  try{
+    let newFood = await Food.create(req.body.food, {returning: true})
+    let newRecipe = await Recipe.create({returning: true})
+    await newFood.addRecipe(newRecipe)
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body.ingredients[0]})
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body.ingredients[1]})
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body.ingredients[2]})
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body.ingredients[3]})
+    let foods = await Food.findAll({  include: { all: true, nested: true }})
+    res.json(foods)
+  }catch(err){
+    next(err)
+  }
+})
+
+router.post("/addIngredient", async(req, res, next) =>{
+  try{
+    await Ingredient.create(req.body)
+    res.sendStatus(204)
+  }catch(err){
+    next(err)
+  }
+})
+
 router.use(function (req, res, next) {
     const err = new Error('Not found.');
     err.status = 404;

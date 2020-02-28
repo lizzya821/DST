@@ -19,9 +19,10 @@ const Food = db.define("food", {
         type: Sequelize.DECIMAL, 
         allowNull: false
     }, 
-    restrictions: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
-    }, 
+    // restrictions: {
+    //     type: Sequelize.STRING, 
+    //     defaultValue: ("two monster meats", "mandrake")
+    // }, 
     imageURL: {
         type: Sequelize.STRING
     }, 

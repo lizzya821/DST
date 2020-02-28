@@ -1,13 +1,12 @@
 import React from "react";
 
-const Recipe = ({ clicked, recipe, ...props }) => {
-  // console.log(props.food)
+const Recipe = ({ clicked, recipe, food, ...props }) => {
   return (
     <>
       {clicked && (
         <>
           <tr>
-            <td>{props.food} Recipe:</td>
+            <td>{food} Recipe:</td>
             {recipe.IngredientRecipes.map(ingredientRecipe => {
               return (
                 <td key={ingredientRecipe.id}>

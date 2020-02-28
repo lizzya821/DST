@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux"
 import {useState} from "react"
 import {createRecipe } from "../redux/reducer"
 import IngredientSelect from "./IngredientForm"
+import Recipe from "./Recipe"
 
 const AddRecipe = props => {
     const [recipeIngredients, setRecipeIngredients] = useState({
@@ -16,13 +17,14 @@ const AddRecipe = props => {
         event.preventDefault()
         let info ={
             ingredients: Object.values(recipeIngredients), 
-            foodId: props.location.foodId
+            foodId: props.location.food.id
         }
         dispatch(createRecipe(info))
         props.history.push("/")
     }
     return (
         <div>
+            <h1>{`New Recipe for ${props.location.food.name}`}</h1>
             <form onChange={()=>setRecipeIngredients({...recipeIngredients, [event.target.name]: event.target.value})}  onSubmit={handleSubmit}>
                 <label>Ingredients</label>
                 <br></br>
