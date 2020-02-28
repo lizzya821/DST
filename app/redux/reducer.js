@@ -56,7 +56,7 @@ export const createRecipe = (info) => {
   return async dispatch => {
     try{
       let{data} = await axios.post(`/api/addRecipe/${info.foodId}`, info.ingredients)
-      console.log(data)
+      console.log("data", data)
       dispatch(addRecipe(data))
     }catch(err){
       console.log(err)

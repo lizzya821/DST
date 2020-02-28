@@ -1,6 +1,7 @@
 import React from "react";
 
 const Recipe = ({ clicked, recipe, ...props }) => {
+  // console.log(props.food)
   return (
     <>
       {clicked && (

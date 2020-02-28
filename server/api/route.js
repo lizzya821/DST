@@ -52,16 +52,18 @@ router.get("/meat", async(req, res, next) => {
 
 router.post("/addRecipe/:foodId", async(req, res, next) => {
   try{
-    console.log("req.body", req.body)
     let newRecipe = await Recipe.create({returning: true})
     let food = await Food.findByPk(req.params.foodId)
     await food.addRecipe(newRecipe)
-     await req.body.forEach(async(ingredient) => {
-      await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: ingredient})
-    })
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body[0]})
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body[1]})
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body[2]})
+    await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: req.body[3]})
     let updatedFood = await Food.findOne({
-      where: {id: req.params.foodId},  
-      iclude:{model: Recipe}
+      where: {
+        id: req.params.foodId
+      }, 
+      include:[{all: true, nested: true}]
     })
     res.json(updatedFood)
   }catch(err){

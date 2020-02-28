@@ -31,7 +31,7 @@ const AddRecipe = props => {
             foodId: props.location.foodId
         }
         dispatch(createRecipe(info))
-        // props.history.push("/")
+        props.history.push("/")
     }
     return (
         <div>

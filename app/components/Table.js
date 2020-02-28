@@ -1,11 +1,16 @@
 import React from "react";
 import FoodRow from "./FoodRow.js";
-import {useDispatch} from "react-redux"
-import {orderFood} from "../redux/reducer"
+import {useDispatch, useSelector} from "react-redux"
+import {orderFood, fetchFood} from "../redux/reducer"
+import { useEffect } from "react";
+
 
 const Table = props => {
-  const foods = props.foods;
+  const foods = useSelector(state => state);
   const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchFood());
+  }, []);
   return (
     <div>
       <table>
@@ -20,8 +25,8 @@ const Table = props => {
           </tr>
         </thead>
         <tbody>
-          {foods.map.length &&
-            foods.map(food => {
+        
+            {foods.map(food => {
               return <FoodRow key={food.id} food={food} />;
             })}
         </tbody>
