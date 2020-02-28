@@ -1,8 +1,8 @@
 import React from "react"
 import {useDispatch} from "react-redux"
-import {useState, useEffect} from "react"
-import Axios from "axios"
+import {useState} from "react"
 import {createRecipe } from "../redux/reducer"
+import IngredientSelect from "./IngredientForm"
 
 const AddRecipe = props => {
     const [recipeIngredients, setRecipeIngredients] = useState({
@@ -11,19 +11,7 @@ const AddRecipe = props => {
         ingredient3: "1", 
         ingredient4: "1", 
     })
-    const [ingredients, setIngredients] = useState([])
     const dispatch = useDispatch();
-    useEffect(() => {
-        async function fetch(){
-            try{
-                let {data} = await Axios.get("/api/allIngredients")
-                setIngredients(data)
-            }catch(err){
-                console.log(err)
-            }
-        }
-        fetch()
-    }, [])
     const handleSubmit = (event) => {
         event.preventDefault()
         let info ={
@@ -39,30 +27,7 @@ const AddRecipe = props => {
                 <label>Ingredients</label>
                 <br></br>
                 <br></br>
-                <label>Ingredient 1:</label>
-                <select name="ingredient1">
-                    {ingredients.map(ingredient => {
-                        return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
-                    })}
-                </select>
-                <label>Ingredient 2: </label>
-                <select name="ingredient2">
-                    {ingredients.map(ingredient => {
-                        return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
-                    })}
-                </select>
-                <label>Ingredient 3: </label>
-                <select name="ingredient3">
-                    {ingredients.map(ingredient => {
-                        return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
-                    })}
-                </select>
-                <label>Ingredient 4: </label>
-                <select name="ingredient4">
-                    {ingredients.map(ingredient => {
-                        return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
-                    })}
-                </select>
+                <IngredientSelect/>
                 <br></br>
                 <button type="submit">Add Recipe</button>
             </form>

@@ -6,7 +6,11 @@ import { fetchFood, filterMeat } from "../redux/reducer.js";
 import {Link} from "react-router-dom"
 
 const Root = () => {
-
+  const foods = useSelector(state => state);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchFood());
+  }, []);
     return (
         <div>
             <p>DON'T STARVE FOODS AND RECIPES</p>
@@ -17,7 +21,7 @@ const Root = () => {
               <input type="radio" value="meat" name="meatOrNoMeat"/>
               <label for="meat">Contains Meat</label>
             </div>
-            <Table/>
+            <Table foods={foods}/>
         </div>
     )
 }

@@ -6,11 +6,8 @@ import { useEffect } from "react";
 
 
 const Table = props => {
-  const foods = useSelector(state => state);
+  const foods = props.foods
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchFood());
-  }, []);
   return (
     <div>
       <table>
