@@ -6,14 +6,13 @@ import {createRecipe } from "../redux/reducer"
 
 const AddRecipe = props => {
     const [recipeIngredients, setRecipeIngredients] = useState({
-        ingredient1: 1,
-        ingredient2: 1, 
-        ingredient3: 1, 
-        ingredient4: 1, 
+        ingredient1: "1",
+        ingredient2: "1", 
+        ingredient3: "1", 
+        ingredient4: "1", 
     })
     const [ingredients, setIngredients] = useState([])
     const dispatch = useDispatch();
-    console.log(recipeIngredients)
     useEffect(() => {
         async function fetch(){
             try{
@@ -25,32 +24,41 @@ const AddRecipe = props => {
         }
         fetch()
     }, [])
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        let info ={
+            ingredients: Object.values(recipeIngredients), 
+            foodId: props.location.foodId
+        }
+        dispatch(createRecipe(info))
+        // props.history.push("/")
+    }
     return (
         <div>
-            <form>
+            <form onChange={()=>setRecipeIngredients({...recipeIngredients, [event.target.name]: event.target.value})}  onSubmit={handleSubmit}>
                 <label>Ingredients</label>
                 <br></br>
                 <br></br>
                 <label>Ingredient 1:</label>
-                <select onChange={()=>setRecipeIngredients({...recipeIngredients, ingredient1: event.target.value})}>
+                <select name="ingredient1">
                     {ingredients.map(ingredient => {
                         return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
                     })}
                 </select>
                 <label>Ingredient 2: </label>
-                <select onChange={()=>setRecipeIngredients({...recipeIngredients, ingredient2: event.target.value})}>
+                <select name="ingredient2">
                     {ingredients.map(ingredient => {
-                        return <option name="ingredient2" key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
+                        return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
                     })}
                 </select>
                 <label>Ingredient 3: </label>
-                <select>
+                <select name="ingredient3">
                     {ingredients.map(ingredient => {
                         return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
                     })}
                 </select>
                 <label>Ingredient 4: </label>
-                <select>
+                <select name="ingredient4">
                     {ingredients.map(ingredient => {
                         return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
                     })}

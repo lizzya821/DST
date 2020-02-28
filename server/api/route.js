@@ -30,8 +30,12 @@ router.get("/allFood/:order", async(req, res, next) => {
 })
 
 router.get("/allIngredients", async(req, res, next) => {
-  let ingredients = await Ingredient.findAll()
-  res.json(ingredients)
+  try{
+    let ingredients = await Ingredient.findAll()
+    res.json(ingredients)
+  }catch(err){
+    next(err)
+  }
 })
 
 router.get("/meat", async(req, res, next) => {
@@ -46,15 +50,18 @@ router.get("/meat", async(req, res, next) => {
   }
 })
 
-router.post("/addRecipe", async(req, res, next) => {
+router.post("/addRecipe/:foodId", async(req, res, next) => {
   try{
     console.log("req.body", req.body)
-    let newRecipe = await Recipe.create({foodId: req.body.foodId})
-     await req.body.ingredients.forEach(ingredient => {
-      return IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: ingredient.id})
+    let newRecipe = await Recipe.create({returning: true})
+    let food = await Food.findByPk(req.params.foodId)
+    await food.addRecipe(newRecipe)
+     await req.body.forEach(async(ingredient) => {
+      await IngredientRecipe.create({recipeId: newRecipe.id, ingredientId: ingredient})
     })
-    let updatedFood = await Food.findById(req.body.foodId, {
-      iclude:{all: true, nested: true}
+    let updatedFood = await Food.findOne({
+      where: {id: req.params.foodId},  
+      iclude:{model: Recipe}
     })
     res.json(updatedFood)
   }catch(err){

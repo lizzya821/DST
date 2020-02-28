@@ -17,7 +17,7 @@ const FoodRow = props => {
         <td>{food.hunger}</td>
         <td>{food.restrictions.join(",  ")}</td>
       </tr>
-      {clicked && <tr><Link to="/addRecipe">Add A Recipe</Link></tr>}
+      {clicked && <tr><Link to={{pathname:"/addRecipe", foodId:food.id}}>Add A Recipe</Link></tr>}
       {food.recipes.map(recipe => {
         return <Recipe clicked={clicked} recipe={recipe} key={recipe.id} food={food.name} />
       })}

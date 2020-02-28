@@ -55,7 +55,8 @@ export const filterMeat = (value) => {
 export const createRecipe = (info) => {
   return async dispatch => {
     try{
-      let{data} = await axios.post("/api/addRecipe", info)
+      let{data} = await axios.post(`/api/addRecipe/${info.foodId}`, info.ingredients)
+      console.log(data)
       dispatch(addRecipe(data))
     }catch(err){
       console.log(err)
@@ -69,7 +70,7 @@ export const createRecipe = (info) => {
       case GET_FOOD:
         return action.food
       case ADD_RECIPE: 
-       let filteredFoods = state.filter(food.id !== action.updatedFood.id)
+       let filteredFoods = state.filter(food =>food.id !== action.updatedFood.id)
        return [...filteredFoods, action.updatedFood]
       default: 
         return state
