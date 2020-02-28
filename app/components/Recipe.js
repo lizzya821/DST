@@ -2,7 +2,7 @@ import React from "react";
 
 const Recipe = ({ clicked, recipe, food, ...props }) => {
   return (
-    <>
+    < div className="recipes">
       {clicked && (
         <>
           <tr>
@@ -18,7 +18,7 @@ const Recipe = ({ clicked, recipe, food, ...props }) => {
           </tr>
         </>
       )}
-    </>
+    </div>
   );
 };
 

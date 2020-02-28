@@ -19,7 +19,7 @@ const FoodRow = props => {
       </tr>
       {clicked && <tr><Link class="badge badge-light cheese" to={{pathname:"/addRecipe", food: food}}>Add A Recipe</Link></tr>}
       {food.recipes.map(recipe => {
-        return <Recipe clicked={clicked} recipe={recipe} key={recipe.id} food={food.name} />
+        return <Recipe className={recipes} clicked={clicked} recipe={recipe} key={recipe.id} food={food.name} />
       })}
     </>
   );
